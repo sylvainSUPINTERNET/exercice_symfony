@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ticket</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ticket.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ ticket.title }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ ticket.content }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if ticket.date %}{{ ticket.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('ticket_index') }}">Back to the list</a>
+        </li>
+        {#
+        <li>
+            <a href="{{ path('ticket_edit', { 'id': ticket.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+        #}
+
+    </ul>
+
+    <div class="response">
+
+        <h1>Message</h1>
+
+        <table>
+            <tbody>
+            {% for message in messages %}
+            {#
+                <tr>
+                <th>Id</th>
+                <td>{{ message.id }}</td>
+            </tr>
+            #}
+            <tr>
+                <th>Content</th>
+                <td>{{ message.content }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if message.date %}{{ message.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
+
+    <div class="blockMessage">
+        <h1>Message creation</h1>
+
+        {{ form_start(form, { 'action': path('message_new', {'ticketId': ticket.id }), 'method': 'POST' }) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+        {{ form_end(form) }}
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,4 @@
+services:
+#    awesome.example:
+#        class: AwesomeBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
